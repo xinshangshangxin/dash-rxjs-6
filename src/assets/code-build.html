@@ -1,0 +1,12 @@
+<script>
+  let codeEleList = document.querySelectorAll('body > article > div.api-body > section.description > code-example');
+  [...codeEleList].forEach((ele) => {
+    let html = window.prettyPrintOne(ele.innerHTML, 'javascript', false);
+    ele.innerHTML = `<aio-code>
+  <pre class="prettyprint lang-javascript"> 
+    <code class="animated fadeIn">${html}
+    </code>   
+ </pre>
+</aio-code>`
+  });
+</script>

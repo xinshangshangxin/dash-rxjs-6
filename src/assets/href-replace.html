@@ -1,0 +1,11 @@
+<script>
+  let depth = location.href.replace(/.*\/api\//, '').split('/').length;
+  let aEleList = document.querySelectorAll('a');
+  [...aEleList].forEach((ele) => {
+    let href = ele.href;
+    if (/\/api\//.test(href)) {
+      let depthStr = new Array(depth).fill('..').join('/');
+      ele.href = href.replace(/.*\/api\//, `${depthStr}/api/`) + '.html';
+    }
+  });
+</script>
