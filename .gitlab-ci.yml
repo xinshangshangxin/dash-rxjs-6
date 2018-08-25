@@ -1,0 +1,26 @@
+image: demoshang/docker-bash:18
+
+services:
+  - docker:dind
+
+variables:
+  DOCSET_NAME: rxjs6.docset
+  CONTAINER_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH
+
+stages:
+  - build
+
+
+build:
+  stage: build
+  artifacts:
+    # 保存压缩包的名称
+    name: "${CI_COMMIT_SHA}-${DOCSET_NAME}"
+    # 要保存的文件的路径
+    paths:
+      - ${DOCSET_NAME}/
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - apk add jq
+    # docker build
+    - bash devops/local/index.sh docker
