@@ -30,6 +30,11 @@ case ${key} in
     source build-docker.sh $*
     shift $#
     ;;
+    release)
+    shift 1
+    source github-release.sh $*
+    shift $#
+    ;;
     *)
     echo ${key}
     shift

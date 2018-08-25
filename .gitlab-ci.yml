@@ -9,6 +9,7 @@ variables:
 
 stages:
   - build
+  - github_release
 
 
 build:
@@ -24,3 +25,18 @@ build:
     - apk add jq
     # docker build
     - bash devops/local/index.sh docker
+
+github_release:
+  stage: github_release
+  variables:
+    GITHUB_RELEASE_VERSION: v0.7.2
+    GITHUB_REPO: dash-rxjs-6
+    # 要压缩上传的路径
+    GITHUB_UPLOAD_PATH: ${DOCSET_NAME}
+    # 压缩后的名称
+    GITHUB_UPLOAD_ZIP_NAME: ${DOCSET_NAME}.zip
+  script:
+    - apk add --no-cache jq wget openssl tar zip
+    - bash devops/local/index.sh release
+  only:
+    - tags

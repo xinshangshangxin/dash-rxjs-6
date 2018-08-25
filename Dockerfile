@@ -1,11 +1,11 @@
 FROM node:8-alpine as tool-build
-
+LABEL label=tool-build
 WORKDIR /app
 
-COPY ./package.json /app/package.json
+COPY package.json package.json
 RUN yarn
 
-COPY . /app
+COPY . .
 RUN npm run build \
     && cp -r src/assets/ dist/assets/
 
