@@ -1,7 +1,7 @@
 import { map as bbMap } from 'bluebird';
 import * as fs from 'fs-extra';
 import { parse as pathParse, resolve as pathResolve } from 'path';
-import rp from 'request-promise';
+import requestPromise from 'request-promise';
 
 import { createDatabase, DashApi } from './db';
 
@@ -34,6 +34,7 @@ let sources: {
   codeBuildHtml: string;
   hrefReplaceHtml: string;
 };
+
 let typeMap: TypeMap = {
   const: 'Constant',
   interface: 'Interface',
@@ -42,7 +43,7 @@ let typeMap: TypeMap = {
   'type-alias': 'Type',
 };
 
-const rxjsRp = rp.defaults({
+const rxjsRp = requestPromise.defaults({
   baseUrl: 'https://rxjs-dev.firebaseapp.com',
   json: true,
 });
@@ -111,9 +112,9 @@ async function buildDbIndex(dbPath: string, apiItems: ApiItem[]) {
   let arr: DashApi[] = [];
   apiItems.forEach(({ title, docType, path }) => {
     arr.push({
+      path,
       type: typeMap[docType],
       name: title,
-      path,
     });
   });
 
@@ -142,7 +143,7 @@ async function buildApi(dbPath: string, dirStruct: string) {
     (apiItem) => {
       return buildApiHtml(dirStruct, apiItem);
     },
-    { concurrency: 50 }
+    { concurrency: 50 },
   );
 }
 

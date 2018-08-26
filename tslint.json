@@ -3,4 +3,7 @@
   "extends": ["tslint-config-airbnb"],
   "formatter": "stylish",
   "jsRules": {},
+  "rules": {
+    "prefer-const": false
+  }
 }

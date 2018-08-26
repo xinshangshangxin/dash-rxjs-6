@@ -1,4 +1,4 @@
-import { init, clean } from './build';
+import { clean, init } from './build';
 
 init()
   .then(() => {

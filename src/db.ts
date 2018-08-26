@@ -14,7 +14,7 @@ function createDatabase(apiList: DashApi[], dbPath: string) {
     db.run('CREATE UNIQUE INDEX anchor ON searchIndex (name,type,path);');
 
     let stmt = db.prepare(
-      'INSERT OR IGNORE INTO ' + 'searchIndex(name, type, path) ' + 'VALUES (?, ?, ?)'
+      'INSERT OR IGNORE INTO ' + 'searchIndex(name, type, path) ' + 'VALUES (?, ?, ?)',
     );
 
     apiList.forEach(({ name, type, path }) => {
