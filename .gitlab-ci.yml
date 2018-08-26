@@ -22,7 +22,7 @@ build:
       - ${DOCSET_NAME}/
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-    - apk add jq
+    - apk add --no-cache jq
     # docker build
     - bash devops/local/index.sh docker
 

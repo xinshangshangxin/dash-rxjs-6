@@ -8,6 +8,13 @@ cd ${projectDir}
 zip -r ${GITHUB_UPLOAD_ZIP_NAME} ${GITHUB_UPLOAD_PATH}
 ls -la 
 
+
+github-release release \
+    -u ${GITHUB_USER} \
+    -r ${GITHUB_REPO} \
+    -t ${CI_COMMIT_REF_NAME} \
+    -n ${GITHUB_UPLOAD_ZIP_NAME}
+
 github-release upload \
     -u ${GITHUB_USER} \
     -r ${GITHUB_REPO} \
