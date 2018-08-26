@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -e ts -w ./src -x ./node_modules/.bin/ts-node -- src",
+    "start": "ts-node src",
+    "watch": "nodemon -e ts -w ./src -x ./node_modules/.bin/ts-node -- src",
+    "lint": "tslint src/**/*.ts",
+    "lint-fix": "tslint src/**/*.ts --fix",
     "build": "rm -rf dist && tsc && cp -r src/assets/ dist/assets/ && cp package.json dist/"
   },
   "devDependencies": {
