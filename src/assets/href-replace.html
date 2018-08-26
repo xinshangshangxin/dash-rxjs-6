@@ -5,7 +5,8 @@
     let href = ele.href;
     if (/\/api\//.test(href)) {
       let depthStr = new Array(depth).fill('..').join('/');
-      ele.href = href.replace(/.*\/api\//, `${depthStr}/api/`) + '.html';
+      let [preUrl, anchor = ''] = href.split('#');
+      ele.href = preUrl.replace(/.*\/api\//, `${depthStr}/api/`) + '.html' + '#' + anchor;
     }
   });
 </script>
