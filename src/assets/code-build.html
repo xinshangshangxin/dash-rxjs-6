@@ -1,5 +1,5 @@
 <script>
-  let codeEleList = document.querySelectorAll('body > article > div.api-body > section.description > code-example');
+  let codeEleList = document.querySelectorAll('body code-example');
   [...codeEleList].forEach((ele) => {
     let html = window.prettyPrintOne(ele.innerHTML, 'javascript', false);
     ele.innerHTML = `<aio-code>
