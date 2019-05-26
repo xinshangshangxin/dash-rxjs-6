@@ -12,6 +12,7 @@ const plistPath = `${docsetDir}/Contents/Info.plist`;
 const dbPath = `${docsetDir}/Contents/Resources/docSet.dsidx`;
 const dirStruct = `${docsetDir}/Contents/Resources/Documents/`;
 const iconPath = `${docsetDir}/icon.png`;
+const stylePath = pathResolve(dirStruct, 'assets/style.css');
 
 async function buildInfoPlist() {
   let plistInfo = await fs.readFile(pathResolve(__dirname, 'assets', 'Info.plist'), {
@@ -44,7 +45,7 @@ async function init() {
   await copyResource();
 
   console.info('build documents');
-  await buildApi(dbPath, dirStruct);
+  await buildApi(dbPath, dirStruct, stylePath);
 }
 
 export { init, clean };
