@@ -1,9 +1,10 @@
-FROM node:8-alpine as tool-build
+FROM node:10-alpine as tool-build
 LABEL label=tool-build
 WORKDIR /app
 
 COPY package.json package.json
-RUN yarn
+COPY package-lock.json package-lock.json
+RUN npm i
 
 COPY . .
 RUN npm run build \
@@ -11,11 +12,12 @@ RUN npm run build \
 
 
 
-FROM node:8-alpine
+FROM node:10-alpine
 
 WORKDIR /app
 
 COPY --from=tool-build /app/dist/package.json package.json
-RUN yarn --production
+COPY --from=tool-build /app/package-lock.json package-lock.json
+RUN npm i --production
 
 COPY --from=tool-build /app/dist/ /app/
